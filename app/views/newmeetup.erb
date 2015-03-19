@@ -1,0 +1,22 @@
+<h1>Submit new meetup!</h1>
+
+<form action="/meetups" method="post">
+  <div>
+    <label for="Name">Name</label>
+    <input class="form" type="text" id="Name" name="meetup[name]" value="<%= meetup.name %>">
+  </div>
+  <br>
+  <div>
+    <label for="Description">Description</label>
+    <input class="form" type="text" id="Description" name="meetup[description]" value="<%= meetup.description %>">
+  </div>
+  <br>
+  <div>
+    <label for="Location">Location</label>
+    <input class="form" type="text" id="Location" name="meetup[location]" value="<%= meetup.location %>">
+  </div>
+  <br>
+  <input class="form" type="submit" value="Create Meetup">
+</form>
+<br>
+<a href="/meetups">Home</a>

@@ -30,7 +30,49 @@ def authenticate!
 end
 
 get '/' do
+  redirect '/meetups'
+end
+
+get '/meetups' do
+  @meetups = Meetup.order(:name)
   erb :index
+end
+
+get '/meetups/new' do
+  meetup = Meetup.new
+  erb :newmeetup, locals: { meetup: meetup }
+end
+
+post '/meetups' do
+  meetup = Meetup.new(params[:meetup])
+  if meetup.save && session[:user_id]
+    redirect "meetups/#{meetup.id}"
+  else
+    erb :newmeetup, locals: { meetup: meetup }
+  end
+end
+
+post '/meetups/:id/join' do
+  if Meetup.exists?(params[:id])
+    joined_meetup = Membership.new(user_id: session[:user_id], meetup_id: params[:id])
+    if joined_meetup.save
+      redirect("/meetups/#{params[:id]}?joined=true")
+    end
+  end
+  redirect("/meetups/#{params[:id]}?joined=false")
+end
+
+get '/meetups/:id' do
+  begin
+    @meetup = Meetup.find(params[:id])
+  rescue ActiveRecord::RecordNotFound
+    @meetup = Meetup.new(
+      id: params[:id], users: [], name: 'Meetup not found', location: '', description: ''
+    )
+  end
+
+  @users = @meetup.users
+  erb :show
 end
 
 get '/auth/github/callback' do
@@ -45,7 +87,7 @@ end
 
 get '/sign_out' do
   session[:user_id] = nil
-  flash[:notice] = "You have been signed out."
+  flash[:notice] = 'You have been signed out.'
 
   redirect '/'
 end

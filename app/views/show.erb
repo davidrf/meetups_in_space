@@ -1,0 +1,20 @@
+<% if params[:joined] == 'true' %>
+<h1>Successfully joined!</h1>
+<% elsif params[:joined] == 'false' %>
+<h1>Error: not successfully joined.</h1>
+<% end %>
+<h1><%= @meetup.name %></h1>
+
+<h3>Location</h3>
+<%= @meetup.location %>
+<h3>Description</h3>
+<%= @meetup.description %>
+<h3>Who's going?</h3>
+<% @meetup.users.each do |user| %>
+  <%= user.username %>
+  <br>
+<% end %>
+
+<form action="/meetups/<%= params[:id] %>/join" method="post">
+  <input class="form" type="submit" value="Join this meetup">
+</form>

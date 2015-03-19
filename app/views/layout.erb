@@ -4,8 +4,8 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Meetups</title>
-  <link rel="stylesheet" href="stylesheets/normalize.css" />
-  <link rel="stylesheet" href="stylesheets/app.css" />
+  <link rel="stylesheet" href="/stylesheets/normalize.css" />
+  <link rel="stylesheet" href="/stylesheets/app.css" />
 </head>
 <body>
 
@@ -16,9 +16,9 @@
     <ul class="top-bar-section">
       <% if signed_in? %>
         <li>Signed in as <%= current_user.username %></a></li>
-        <li><a href="/sign_out">Sign out</a></li>
+        <li><a href="/sign_out">Sign Out</a></li>
       <% else %>
-        <li><a href="/auth/github">Sign in</a></li>
+        <li><a href="/auth/github">Sign In</a></li>
       <% end %>
     </ul>
   </div>

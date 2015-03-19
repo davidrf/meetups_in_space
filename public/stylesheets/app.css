@@ -38,3 +38,12 @@ a:visited {
   padding: 1em;
   background-color: #3B9089;
 }
+
+.form {
+  color: #000000;
+}
+
+ul#meetups {
+  padding-left: 0;
+  list-style-type: none;
+}
